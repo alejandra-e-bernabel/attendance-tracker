@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./attendance-tracker-backend
+      dockerfile: Dockerfile
+    container_name: attendance-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - CORS_ORIGIN=http://localhost:80
+    volumes:
+      # Persist SQLite database
+      - attendance-data:/app/data
+    networks:
+      - attendance-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build:
+      context: ./attendance-tracker-frontend
+      dockerfile: Dockerfile
+    container_name: attendance-frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    depends_on:
+      - backend
+    networks:
+      - attendance-network
+
+volumes:
+  attendance-data:
+    driver: local
+
+networks:
+  attendance-network:
+    driver: bridge

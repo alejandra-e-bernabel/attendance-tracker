@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 export default function Navbar() {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    window.location.href = '/login';
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -14,6 +22,11 @@ export default function Navbar() {
           <li><Link to="/students">Students</Link></li>
           <li><Link to="/events">Events</Link></li>
           <li><Link to="/checkin">Check In</Link></li>
+          <li>
+            <button onClick={handleLogout} className="logout-btn">
+              Logout
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
