@@ -30,7 +30,7 @@ export default function CheckIn() {
           scanner?.clear();
           setScannerActive(false);
         },
-        (error) => {
+        () => {
           // Ignore scanning errors
         }
       );

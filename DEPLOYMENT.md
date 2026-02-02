@@ -1,12 +1,17 @@
 # Deployment Guide
 
-This guide covers deploying the Attendance Tracker application to Azure using Docker containers.
+This guide covers deploying the Attendance Tracker application using Docker containers.
+
+## Deployment Options
+
+- **Railway** (Recommended) - Simplest setup, see [RAILWAY.md](RAILWAY.md)
+- **Azure Container Apps** - Enterprise option, detailed below
 
 ## Architecture
 
 - **Backend**: Node.js/Express API with SQLite database
 - **Frontend**: React SPA served by Nginx
-- **Deployment**: Two separate Azure Container Apps
+- **Deployment**: Two separate container apps
 
 ## Local Testing with Docker Compose
 
