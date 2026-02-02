@@ -2,7 +2,10 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "dockerfilePath": "Dockerfile"
+    "dockerfilePath": "Dockerfile",
+    "watchPatterns": [
+      "attendance-tracker-backend/**"
+    ]
   },
   "deploy": {
     "numReplicas": 1,
